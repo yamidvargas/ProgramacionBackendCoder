@@ -2,7 +2,7 @@ import express from "express";
 import { ProductManager } from "./ProductManager2.js";
 const app = express();
 const port = 8080;
-const misproductos = new ProductManager("productos.txt");
+const misproductos = new ProductManager("productos.json");
 let allProducts = misproductos.getProducts();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -10,6 +10,8 @@ app.get("/products", async (req, res) => {
     const { limit } = req.query;
     console.log(typeof limit);
     const allProducts = await misproductos.getProducts();
+     console.log(allProducts)
+   
     if (!limit) {
         const prueba = 1;
         return res.send(allProducts);
