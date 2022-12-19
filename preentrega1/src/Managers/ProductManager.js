@@ -22,7 +22,7 @@ export class ProductManager {
         try {
             const response = await fs.promises.readFile(this.path, "utf-8");
             const myProducts = JSON.parse(response);
-            console.log(myProducts);
+            //console.log(myProducts);
             return myProducts;
         }
         catch (error) {
@@ -87,7 +87,7 @@ export class ProductManager {
             return arrayConIde;
         }
         else {
-            console.log("Not Found");
+            return "Not Found";
         }
     }
     async updateProduct(productId, objUpdated) {
