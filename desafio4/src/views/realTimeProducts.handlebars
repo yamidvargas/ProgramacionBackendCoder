@@ -1,9 +1,9 @@
     <button id="btn_new-product">Create New Product</button>
     <section id="new_product">
-        {{!-- Aca va el fomuralio para cargar un producto nuevo --}}
+        {{!--fomuralio para cargar un producto nuevo --}}
     </section>
 {{#if isLogged}}
-    <h1 class="title">Hello {{user.name}}, wellcome to our <i style="color: red;">realTimeProducts</i> store!</h1>
+    <h1 class="title">hola {{user.name}}, bienvenidos <i style="color: red;">realTimeProducts</i> !</h1>
 
     <section id="card__container" class="cards">
         <hr>
@@ -13,7 +13,7 @@
 
     {{else}}
 
-    <h1 class="title"> You have to be logged to view our products.</h1>
+    <h1 class="title"> necesita estar registrado </h1>
 
 {{/if}}
 

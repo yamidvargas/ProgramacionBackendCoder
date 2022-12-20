@@ -26,8 +26,8 @@ router.get('/', async (req, res) => {
 router.get("/realtimeproducts", async (req, res) => {
     try {
         const user = {
-            name: 'Matias',
-            lastname: 'Chirstello',
+            name: 'yamid ',
+            lastname: 'vargas',
             status: true
         };
         return res.render("realTimeProducts", {
@@ -38,7 +38,7 @@ router.get("/realtimeproducts", async (req, res) => {
     }
     catch (error) {
         console.log(error);
-        res.send({ Succes: false, error: "We're experimenting some kind of error. Please try again later." });
+        res.send({ Succes: false, error: "se produjo un error intenta mas tarde" });
     }
 });
 // POST
@@ -46,11 +46,11 @@ router.get("/realtimeproducts", async (req, res) => {
 router.post("/realtimeproducts", async (req, res) => {
     try {
         const user = {
-            name: 'Matias',
-            lastname: 'Chirstello',
+            name: 'yamid ',
+            lastname: 'vargas ',
             status: true
         };
-        // req.io.socket.emit('realTimeProducts', newProduct) // Enviar peticion dentro del POST
+         // Enviar peticion dentro del POST
         return res.render("realTimeProducts", {
             style: "style.css",
             user: user,
