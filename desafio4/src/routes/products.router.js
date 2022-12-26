@@ -30,9 +30,10 @@ router.get("/:pid", async (req, resp) => {
 //ruta post para agregar productos
 router.post("/", async (req, res) => {
     try {
+        
         const { title, description, code, price, status, stock, category, thumbnail, } = req.body;
         const addProduct = await productManager.addProduct(title, description, code, price, status, stock, category, thumbnail);
-        if (!addProduct) {
+       if (!addProduct) {
             return res.send("faltan datos");
         }
         return res.send({
