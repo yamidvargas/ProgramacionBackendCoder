@@ -91,18 +91,32 @@
    },
    {
       "id": 11,
-      "title": "xbox",
-      "description": "videoconsola",
-      "code": "asdf",
-      "price": "12355544",
-      "status": true
+      "title": "pruebas",
+      "description": "otro",
+      "code": "pruebascode",
+      "price": 4767,
+      "status": true,
+      "stock": 12,
+      "thumbnail": "correo"
    },
    {
       "id": 12,
-      "title": "celular",
-      "description": "asd",
-      "code": "abcd",
-      "price": "5",
-      "status": true
+      "title": "pruebas",
+      "description": "otro",
+      "code": "pruebascode",
+      "price": 4767,
+      "status": true,
+      "stock": 12,
+      "thumbnail": "correo"
+   },
+   {
+      "id": 13,
+      "title": "pruebas",
+      "description": "otro",
+      "code": "pruebascode",
+      "price": 4767,
+      "status": true,
+      "stock": 12,
+      "thumbnail": "correo"
    }
 ]

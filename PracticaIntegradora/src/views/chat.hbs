@@ -1,0 +1,20 @@
+<main>
+        {{!-- <div class="chat_body">
+            <p id="username"> : </p>
+            <input type="text" id="chatBox">
+        </div> --}}
+
+        <form action="" method="post">
+            <label for="user" name="user" id="username"></label>
+            <input type="text" name="message" id="chatBox">
+        </form>
+
+        <div class="chat_logs">
+            <p id="messageLogs"></p>
+        </div>
+</main>
+
+{{!-- Scripts de JS --}}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/index.js"></script>

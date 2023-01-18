@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;0,900;1,400;1,700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: url(https://www2.claro.com.co/portal/co/noticias/imagenes/1615579468133-1-2-bm-Cuidado-de-mascota.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    
+}
+
+.navbar {
+    background-color: azure;
+    display: flex;
+    justify-content: center;
+}
+
+.navbar__list {
+    list-style: none;
+    font-size: 1.6rem;
+    margin: 0 auto;
+}
+
+li {
+    margin: 1rem 10rem;
+}
+
+.container {
+    text-align: center;
+    margin: 8rem auto;
+}
+
+.title {
+    font-size: 3rem;
+    text-align: center;
+    text-decoration: underline;
+    margin: 4rem auto;
+    color: snow
+}
+
+#btn_new-product {
+    font-size: 1rem;
+    margin: 2rem 0 0 2rem;
+    padding: 1rem;
+    background-color: lightskyblue;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.new_product-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 50%;
+    margin: 5rem auto;
+    border: outset 3px rgb(63, 253, 15);
+    background-color: #fbf5f5f0;
+}
+
+input {
+    accent-color: red;
+    height: 30px;
+    margin: 1rem auto;
+    width: 70%;
+}
+
+.send-btn {
+    height: 30px;
+    margin: 1rem auto;
+    background-color: rgb(70, 196, 70);
+    border-radius: 50px;
+    width: 50%;
+    cursor: pointer;
+}
+
+.cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.card__item {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 1rem;
+    padding: 2rem 3rem;
+    border: 2px solid rgb(76, 173, 68);
+}
+
+.card__item-socket {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 1rem;
+    border: 2px solid rgb(202, 45, 33);
+    background: #fbf5f5f0;
+    width: 15rem;
+    height: 20rem;
+}
+
+.card__item-detail {
+    display: flex;
+    flex-direction: row;
+    background: #fbf5f5f0;
+    width: 70rem;
+    height: 40rem;
+}
+
+.card__img {
+    width: 100%;
+    padding: .8rem 3rem;
+    margin: 0 auto;
+}
+
+.card__body {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.card__body-detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 30rem;
+}
+
+.card__body-detail p {
+    font-size: 1.8rem;
+}
+
+p {
+    font-size: 1rem;
+    text-align: center;
+}
+
+.chat_body {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: snow;
+    width: 55vw;
+    margin: 5rem auto;
+}
+
+.chat_body p {
+    font-size: 1.4rem;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.chat_body input {
+    width: 90%;
+}
+.chat_logs {
+    margin: 0 auto;
+    font-size: 1.6rem;
+    width: 40vw;
+    background: snow;
+    border-radius: 20px;
+}

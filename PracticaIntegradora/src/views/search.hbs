@@ -1,0 +1,19 @@
+<main>
+    <h1 class="title">Here's the product you searched.</h1>
+
+    <section id="card__container" class="cards">
+        {{#each productFound}}
+                <div class="card__item-detail">
+                    <img class="card__img" src={{this.thumbnail}}>
+                    <hr>
+                    <div class="card__body-detail">
+                        <p>{{this.title}}</p>
+                        <p><b>{{this.description}}</b></p>
+                        <p>Price: $<i>{{this.price}}</i></p>
+                        <p>Stock Available: {{this.stock}}</p>
+                    </div>
+                </div>
+        {{/each}}        
+    </section>
+
+</main>

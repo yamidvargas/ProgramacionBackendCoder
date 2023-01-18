@@ -31,17 +31,14 @@ export class ProductManager {
     }
     async addProduct(title, description, code, price, status, stock, category, thumbnail) {
         try {
-           
             // Validamos producto
             if (!title ||
                 !description ||
                 !code ||
-                !price 
-                //!status ||
-               // !stock ||
-                //!category
-                ) {
-                    
+                !price ||
+                !status ||
+                !stock ||
+                !category) {
                 console.log("Todos los campos son obligatorios");
                 return undefined;
             }
@@ -58,7 +55,7 @@ export class ProductManager {
             // vamos a buscar el array de products
             let arrayProductos = await fs.promises.readFile(this.path, "utf-8");
             const myProducts = await JSON.parse(arrayProductos);
-            console.log ("mis")
+            console.log("mis");
             myProducts.push(product);
             console.log("Producto agregado correctamente");
             await fs.promises.writeFile(this.path, JSON.stringify(myProducts, null, 3));
