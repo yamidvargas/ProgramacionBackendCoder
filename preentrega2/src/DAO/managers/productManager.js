@@ -1,93 +1,105 @@
-import { productModel } from "../models/product.model";
+import productsModel from "../models/products.model.js";
+import { InputsValidationError, NotFoundError } from "../../utils/error.js";
 export class ProductManager {
-    //metodos
-    async getProducts() {
-        try {
-            const allProducts = productModel.find();
-            //console.log(myProducts);
-            return myProducts;
-        }
-        catch (error) {
-            console.log(error);
-        }
-    }
-    async addProduct(title, description, code, price, status, stock, category, thumbnail) {
-        try {
-            // Validamos producto
-            if (!title ||
-                !description ||
-                !code ||
-                !price ||
-                !status ||
-                !stock ||
-                !category) {
-                console.log("Todos los campos son obligatorios");
-                return undefined;
+    constructor() {
+        //▼Muestra todos los productos con paginación
+        this.getProducts = async (query, options) => {
+            try {
+                if (query === "inStock") {
+                    const products = await productsModel.paginate({ state: true }, options);
+                    if (!products) {
+                        throw new Error("THE DB IS EMPTY");
+                    }
+                    return products;
+                }
+                if (query === "video games" ||
+                    query === "televisores" ||
+                    query === "camaras" ||
+                    query === "tablet" ||
+                    query === "celular" ||
+                    query === "notebook") {
+                    const products = await productsModel.paginate({ category: query }, options);
+                    if (!products) {
+                        throw new Error("THE DB IS EMPTY");
+                    }
+                    return products;
+                }
+                const products = await productsModel.paginate({}, options);
+                if (!products) {
+                    throw new Error("THE DB IS EMPTY");
+                }
+                return products;
             }
-            const product = {
-                id: await this.generateId(),
-                title,
-                description,
-                code,
-                price,
-                status: true,
-                stock,
-                thumbnail,
-            };
-            // vamos a buscar el array de products
-            let arrayProductos = await fs.promises.readFile(this.path, "utf-8");
-            const myProducts = await JSON.parse(arrayProductos);
-            console.log("mis");
-            myProducts.push(product);
-            console.log("Producto agregado correctamente");
-            await fs.promises.writeFile(this.path, JSON.stringify(myProducts, null, 3));
-            return product;
-        }
-        catch (error) {
-            console.log(error);
-        }
-    }
-    async generateId() {
-        try {
-            const response = await fs.promises.readFile(this.path, "utf-8");
-            const myProducts = JSON.parse(response);
-            const count = myProducts.length;
-            const id = count > 0 ? myProducts[count - 1].id + 1 : 1;
-            return id;
-        }
-        catch (error) {
-            console.log(error);
-        }
-    }
-    async getProductById(productId) {
-        let arrayProductos = await fs.promises.readFile(this.path, "utf-8");
-        const myProducts = JSON.parse(arrayProductos);
-        let arrayConIde = myProducts.find((elemento) => {
-            const elementoEncontrado = elemento.id === productId;
-            return elementoEncontrado;
-        });
-        if (arrayConIde) {
-            return arrayConIde;
-        }
-        else {
-            return "Not Found";
-        }
-    }
-    async updateProduct(productId, objUpdated) {
-        const productsCopy = await fs.promises.readFile(this.path, "utf-8");
-        const productsCopyObj = await JSON.parse(productsCopy);
-        const productToUpdate = productsCopyObj.find((product) => product.id === productId);
-        const filteredProducts = productsCopyObj.filter((product) => product.id !== productId);
-        // @ts-ignore: Object is possibly 'null'.
-        const prodcutUpdated = Object.assign({ id: productToUpdate.id }, objUpdated);
-        // @ts-ignore: Object is possibly 'null'.
-        filteredProducts.push(prodcutUpdated);
-        await fs.promises.writeFile(this.path, JSON.stringify(filteredProducts));
-    }
-    async deleteProduct(productId) {
-        const databaseJson = await fs.promises.readFile(this.path, "utf-8");
-        const databaseObj = JSON.parse(databaseJson);
-        const productSearched = databaseObj.filter((product) => product.id !== productId);
-        await fs.promises.writeFile(this.path, JSON.stringify(productSearched));
+            catch (error) {
+                throw new Error(error.message);
+            }
+        };
+        /*     try {
+              const products = await productsModel.paginate({}, options);
+        
+              if (!products) {
+                throw new Error("THE DB IS EMPTY");
+              }
+        
+              return products;
+            } catch (error) {
+              throw new Error(error.message);
+            }
+          }; */
+        //▼Muestra un producto por id
+        this.getProductById = async (pid) => {
+            try {
+                const product = await productsModel.findById({ _id: pid }).lean();
+                if (!product) {
+                    throw new NotFoundError("PRODUCT NOT FOUND");
+                }
+                return product;
+            }
+            catch (error) {
+                throw new Error(error.message);
+            }
+        };
+        //▼Agrega un producto
+        this.addProduct = async (newProduct) => {
+            try {
+                if (!newProduct) {
+                    throw new InputsValidationError("COMPLETE ALL THE FIELDS");
+                }
+                const result = await productsModel.create(newProduct);
+                if (!result) {
+                    throw new Error("FAILED TO ADD TO DATABASE");
+                }
+                return result;
+            }
+            catch (error) {
+                throw new Error(error.message);
+            }
+        };
+        //▼Actualiza un producto por id
+        this.updateProduct = async (pid, updatedProduct) => {
+            try {
+                if (!pid) {
+                    throw new InputsValidationError("INVALID PRODUCT ID");
+                }
+                const result = await productsModel.updateOne({ _id: pid }, updatedProduct);
+                return result;
+            }
+            catch (error) {
+                throw new Error(error.message);
+            }
+        };
+        //▼Elimina un producto
+        this.deleteProduct = async (pid) => {
+            try {
+                if (!pid) {
+                    throw new InputsValidationError("INVALID PRODUCT ID");
+                }
+                const result = await productsModel.deleteOne({ _id: pid });
+                return result;
+            }
+            catch (error) {
+                throw new Error(error.message);
+            }
+        };
     }
 }
