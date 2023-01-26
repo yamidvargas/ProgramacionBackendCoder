@@ -1,0 +1,24 @@
+{
+  "name": "preentrega2",
+  "version": "1.0.0",
+  "description": "preentrega 2 programacio backend",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Yamid Vargas",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "@types/express": "^4.17.15",
+    "@types/mongoose-paginate-v2": "^1.6.5",
+    "express": "^4.18.2",
+    "express-handlebars": "^6.0.6",
+    "mongoose": "^6.8.4",
+    "mongoose-paginate-v2": "^1.7.1",
+    "socket.io": "^4.5.4"
+  }
+}
