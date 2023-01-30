@@ -14,11 +14,12 @@ const addToCart = async (cid, pid) => {
         if (result.status === "succes") {
             alert("Producto agregado correctamente");
         }
+        return result;
     }
     catch (error) {
         console.log(error);
     }
 };
 addToCartBtn.addEventListener("click", () => {
-    addToCart("63cf4a1250fa979834014296", pid);
+    addToCart("63d7cbab305dba7349d8ea89", pid);
 });

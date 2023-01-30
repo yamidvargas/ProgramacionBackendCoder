@@ -64,7 +64,7 @@ Router.post("/:cid/product/:pid", async (req, res) => {
     try {
         const { cid, pid } = req.params;
         const result = await Managers.cartsManager.addProductToCart(cid, pid);
-        console.log("el resultado", result);
+        //console.log("78 cartRouter el resultado",result)
         res.send({
             status: "succes",
             payload: result,
