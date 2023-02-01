@@ -33,7 +33,7 @@ export class CartManager {
             try {
                 const cart = await cartModel
                     .findById({ _id: cid })
-                    .populate("cart.product")
+                    .populate("car.product")
                     .lean();
                 if (!cart) {
                     throw new NotFoundError("CART NOT FOUND");
@@ -47,23 +47,22 @@ export class CartManager {
         //▼Agrega un prodcuto al carrito
         this.addProductToCart = async (cid, pid) => {
             try {
-                const findCart = await cartModel.findOne({ _id: cid }).lean();
+                const findCart = await cartModel.findById({ _id: cid });
                 const findProductInCart = await cartModel.findOne({
-                    "products.product": pid,
+                    "car.product": pid,
                 });
                 if (findProductInCart) {
                     const upgradeQuantity = await cartModel.updateOne({
-                        "products.product": pid
+                        "car.product": pid
                     }, {
                         $inc: {
-                            "product.$.quantity": 1,
+                            "car.$.quantity": 1,
                         },
                     });
                     return upgradeQuantity;
                 }
-                findCart.products.push({ product: pid, quantity: 1 });
+                const addProduct = findCart.car.push({ product: pid, quantity: 1 });
                 const result = await cartModel.updateOne({ _id: cid }, findCart);
-                console.log("el find", findCart);
                 return result;
             }
             catch (error) {
@@ -117,7 +116,7 @@ export class CartManager {
             try {
                 const deleteOne = await cartModel.updateOne({ _id: cid }, {
                     $pull: {
-                        cart: { product: pid },
+                        car: { product: pid },
                     },
                 });
                 return deleteOne;
@@ -133,7 +132,7 @@ export class CartManager {
                     _id: cid,
                 }, {
                     $set: {
-                        cart: [],
+                        car: [],
                     },
                 });
                 return emptyCart;

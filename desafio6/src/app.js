@@ -6,8 +6,11 @@ import { Server } from 'socket.io';
 import __dirname from "./dirname.js";
 import indexRouter from "./routes/index.routes.js";
 import { messageModel } from "./DAO/models/mesagge.model.js";
+import cookieParser from "cookie-parser";
 const app = express();
 const PORT = 8080;
+//uso de cookieparser
+app.use(cookieParser());
 // Express configuration
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

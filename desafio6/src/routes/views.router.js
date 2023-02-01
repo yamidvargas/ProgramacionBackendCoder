@@ -60,7 +60,7 @@ Router.get("/carts/:cid", async (req, res) => {
     try {
         const { cid } = req.params;
         const result = await Managers.cartsManager.getCartById(cid);
-        const cart = result.cart;
+        const cart = result.car;
         res.render("cart", {
             style: "styles.css",
             cart,

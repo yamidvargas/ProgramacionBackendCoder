@@ -1,13 +1,5 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-  font-weight: 600;
-}
-
-body {
-  background-color: #61dafb;
+body{
+  background-color: rgb(130, 143, 168);
 }
 
 nav {
@@ -53,13 +45,12 @@ p {
 }
 
 .pagination__button {
-  max-width: 150px;
-  min-width: 50px;
+
   height: 30px;
   padding: 0 0.6rem;
   border-radius: 5px;
-  background-color:  #61dafb;
-  text-transform: uppercase;
+ 
+  
 }
 
 .pagination__button:hover {
@@ -116,15 +107,7 @@ p {
   text-transform: uppercase;
 }
 
-.product__button {
-  max-width: 150px;
-  min-width: 100px;
-  height: 40px;
-  padding: 0.6rem;
-  border-radius: 5px;
-  background-color:  #61dafb;
-  text-transform: uppercase;
-}
+
 
 .product__button:hover {
   cursor: pointer;
@@ -186,7 +169,7 @@ p {
   height: 40px;
   padding: 0.6rem;
   border-radius: 5px;
-  background-color: #61dafb;
+  background-color: #b5c527;
 }
 
 .product__detail__button:hover {
@@ -250,7 +233,8 @@ p {
   height: 30px;
   padding: 0 0.5rem;
   border-radius: 5px;
-  background-color: #61dafb;
+  background-color: #b5c527;
+
 }
 
 .cart__deleteBtn:hover {
@@ -269,7 +253,8 @@ p {
   height: 30px;
   padding: 0 0.5rem;
   border-radius: 5px;
-  background-color:  #61dafb;
+  background-color: #b5c527;
+
 }
 
 .cart__total--btn:hover {

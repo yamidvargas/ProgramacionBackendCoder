@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
-const userCollection = "Users";
+const userCollection = "users";
 const userSchema = new Schema({
     first_name: String,
     last_name: String,
