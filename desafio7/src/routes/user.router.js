@@ -16,6 +16,7 @@ router.post("/create", async (req, res) => {
     try {
         const newUser = req.body;
         const user = await userManager.userCreate(newUser);
+        console.log(user);
         if (!user) {
             return res.redirect("/user/register");
         }
@@ -24,28 +25,6 @@ router.post("/create", async (req, res) => {
     catch (error) {
         console.log(error);
         res.redirect("/register");
-    }
-});
-router.post("/login", async (req, res) => {
-    try {
-        const { email, password } = req.body;
-        if (email === "adminCoder@coder.com" && password === "adminCod3r123") {
-            req.session.user = {
-                first_name: "admin",
-            };
-            req.session.user.role = "admin";
-            return res.redirect("/home/products");
-        }
-        const user = await Manager.UsersManager.userLogin(email, password);
-        if (!user) {
-            res.status(401, { error: "Usuario o contrasena incorrecta" });
-            return res.render("login", {});
-        }
-        req.session.user = user;
-        res.redirect("/home/products");
-    }
-    catch (error) {
-        console.log(error);
     }
 });
 export default router;
