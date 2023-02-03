@@ -5,11 +5,9 @@ import __dirname from "./dirname.js";
 import indexRouter from "./routes/index.routes.js";
 import session from "express-session";
 import MongoStore from "connect-mongo";
-import { config } from "dotenv";
 import { connectDB, MONGOOSE_URI } from "./server/mongo.js";
 //const
 const app = express();
-const process = config().parsed;
 const PORT = 8080;
 //mongo connect
 connectDB();
