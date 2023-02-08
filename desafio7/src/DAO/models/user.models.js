@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
 const Schema = mongoose.Schema;
 const userCollection = "users";
 const userSchema = new Schema({
@@ -19,5 +20,12 @@ const userSchema = new Schema({
         default: "user",
     },
 });
+userSchema.statics.encryptPassword = async (password) => {
+    const salt = await bcrypt.genSalt(10);
+    return await bcrypt.hash(password, salt);
+};
+userSchema.statics.comparePassword = async (password, recivedPassword) => {
+    return await bcrypt.compare(password, recivedPassword);
+};
 const userModel = mongoose.model(userCollection, userSchema);
 export default userModel;

@@ -1,5 +1,6 @@
 import express from "express";
 import Managers from "../DAO/managers/indexManager.js";
+import auth from "../utils/auth.js";
 const Router = express.Router();
 //Mostrar todos los productos
 Router.get("/", async (req, res) => {
@@ -56,7 +57,7 @@ Router.get("/:pid", async (req, res) => {
     }
 });
 //Muestra un carrito
-Router.get("/carts/:cid", async (req, res) => {
+Router.get("/carts/:cid", auth, async (req, res) => {
     try {
         const { cid } = req.params;
         const result = await Managers.cartsManager.getCartById(cid);

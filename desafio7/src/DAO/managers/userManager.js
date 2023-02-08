@@ -40,5 +40,14 @@ export class UserManager {
                 console.log(error);
             }
         };
+        this.getUserById = async (id) => {
+            try {
+                const findUser = await userModel.findById(id);
+                return findUser;
+            }
+            catch (error) {
+                console.log(error);
+            }
+        };
     }
 }
