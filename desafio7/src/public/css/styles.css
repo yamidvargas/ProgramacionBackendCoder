@@ -2,28 +2,7 @@ body{
   background-color: rgb(130, 143, 168);
 }
 
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 50px;
-  background-color: white;
-  margin-bottom: 1rem;
-}
 
-ul {
-  display: flex;
-  gap: 1rem;
-}
-
-li {
-  list-style: none;
-}
-
-a {
-  color: #333;
-  text-decoration: none;
-}
 
 img {
   max-width: 200px;
@@ -32,9 +11,7 @@ img {
   object-fit: contain;
 }
 
-p {
-  color: blueviolet;
-}
+
 
 .pagination__container {
   display: flex;

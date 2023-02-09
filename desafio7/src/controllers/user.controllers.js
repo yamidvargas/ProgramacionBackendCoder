@@ -25,7 +25,7 @@ export const createUser = async (req, res) => {
     try {
         const { first_name, last_name, email, age, password, cart, role } = req.body;
         const findUser = await userManager.getUserByEmail(email);
-        //Si el mail ya existe redirige a login
+        //Si  email ya existe redirige a login
         if (findUser) {
             return res.status(302).redirect("/login");
         }
@@ -50,7 +50,7 @@ export const createUser = async (req, res) => {
 export const userLogout = (req, res) => {
     try {
         req.session.destroy();
-        res.redirect("/login");
+        res.redirect("/user/login");
     }
     catch (error) {
         console.log(error);
@@ -68,14 +68,14 @@ export const loginUser = async (req, res) => {
                 first_name: "admin",
             };
             req.session.user.role = "admin";
-            return res.redirect("/home/products");
+            return res.redirect("/products");
         }
         const user = await userManager.userLogin(email, password);
         if (!user) {
             return res.status(401).render("login", {});
         }
         req.session.user = user;
-        res.redirect("/home/products");
+        res.redirect("/products");
     }
     catch (error) {
         console.log(error);
@@ -87,7 +87,7 @@ export const loginUserPassport = async (req, res) => {
     if (!req.user)
         res.status(400).send("Invalid credentials");
     req.session.user = req.user;
-    return res.redirect("/home/products");
+    return res.redirect("/products");
 };
 //User register passport local
 export const createUserPassport = async (req, res) => {
@@ -98,5 +98,5 @@ export const loginUserGithub = async (req, res) => {
     if (!req.user)
         res.status(400).send("Something went wrong");
     req.session.user = req.user;
-    return res.redirect("/home/products");
+    return res.redirect("/products");
 };

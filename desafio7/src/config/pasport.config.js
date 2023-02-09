@@ -12,7 +12,7 @@ const initializePassporr = () => {
         callbackURL: "http://localhost:8080/user/githubcallback",
     }, async (accessToken, refreshToken, profile, done) => {
         try {
-            const findUser = await UserManager.getUserByEmail({ email: profile._json.email });
+            const findUser = await userManager.getUserByEmail({ email: profile._json.email });
             if (findUser) {
                 return done(null, findUser);
             }
@@ -22,10 +22,12 @@ const initializePassporr = () => {
                 email: profile._json.email,
                 password: "",
             };
-            const result = await UserManager.userCreate(newUser);
+            console.log(newUser);
+            const result = await userManager.userCreate(newUser);
             return done(null, result);
         }
         catch (error) {
+            console.log(error);
             return done("Error to register", error);
         }
     }));

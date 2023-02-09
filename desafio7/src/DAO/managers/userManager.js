@@ -2,9 +2,10 @@ import { NotFoundError } from "../../utils/error.js";
 import userModel from "../models/user.models.js";
 export class UserManager {
     constructor() {
-        //▼Crear un nuevo usuario
+        //Crear un nuevo usuario
         this.userCreate = async (newUserData) => {
             try {
+                newUserData.password = await userModel.encryptPassword(newUserData.password);
                 const result = await userModel.create(newUserData);
                 if (!result) {
                     throw new Error("FAILED TO ADD TO DATABASE");
@@ -15,19 +16,22 @@ export class UserManager {
                 console.log(error);
             }
         };
-        //▼Loguear usuario
+        //Loguear usuario
         this.userLogin = async (email, password) => {
             try {
-                const result = await userModel.findOne({ email, password }).lean();
-                if (!result) {
+                const findUser = await userModel.findOne({ email }).lean();
+                if (!findUser)
                     throw new NotFoundError("USER NOT FOUND");
-                }
-                return result;
+                const passwordCompare = await userModel.comparePassword(password, findUser.password);
+                if (!passwordCompare)
+                    throw new NotFoundError("Invalid Password");
+                return findUser;
             }
             catch (error) {
                 console.log(error);
             }
         };
+        //encontrar todos los usuarios
         this.getAllUser = async () => {
             try {
                 const result = await userModel.find().lean();
@@ -43,6 +47,15 @@ export class UserManager {
         this.getUserById = async (id) => {
             try {
                 const findUser = await userModel.findById(id);
+                return findUser;
+            }
+            catch (error) {
+                console.log(error);
+            }
+        };
+        this.getUserByEmail = async (email) => {
+            try {
+                const findUser = await userModel.findOne(email);
                 return findUser;
             }
             catch (error) {
