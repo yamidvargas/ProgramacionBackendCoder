@@ -1,6 +1,6 @@
 import productsModel from "../models/products.model.js";
 import { InputsValidationError, NotFoundError } from "../utils/error.js";
-export class ProductManager {
+export class ProductServices {
     constructor() {
         //▼Muestra todos los productos con paginación
         this.getProducts = async (query, options) => {
@@ -103,3 +103,4 @@ export class ProductManager {
         };
     }
 }
+export const ProductsService = new ProductServices();

@@ -1,6 +1,6 @@
 import { NotFoundError } from "../utils/error.js";
 import userModel from "../models/user.models.js";
-export class UserManager {
+export class UserServices {
     constructor() {
         //Crear un nuevo usuario
         this.userCreate = async (newUserData) => {
@@ -64,3 +64,4 @@ export class UserManager {
         };
     }
 }
+export const UserService = new UserServices();

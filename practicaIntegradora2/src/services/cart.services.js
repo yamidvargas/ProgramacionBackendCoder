@@ -139,3 +139,4 @@ export class CartService {
         };
     }
 }
+export const CartServices = new CartService();
