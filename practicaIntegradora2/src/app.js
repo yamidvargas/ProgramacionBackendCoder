@@ -8,17 +8,23 @@ import MongoStore from "connect-mongo";
 import { connectDB, MONGOOSE_URI } from "./server/mongo.js";
 import initializePassporr from "./config/pasport.config.js";
 import passport from "passport";
+import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 //const
 const app = express();
-const PORT = 8080;
+dotenv.config();
+const PORT = process.env.PORT || 8080;
+const SESSION_SECRET = "cursoCoder";
+const COOKIE_SECRET = 'myCookieCoder';
 // initialize passport
 initializePassporr();
-//mongo connect
+//mongo connects
 connectDB();
 // Express configuration adn middlewares
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser(COOKIE_SECRET));
 // BodyParser configuration
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -32,7 +38,7 @@ app.use(session({
         },
         ttl: 200,
     }),
-    secret: "perros",
+    secret: SESSION_SECRET,
     resave: true,
     saveUninitialized: true,
 }));

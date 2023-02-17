@@ -1,5 +1,5 @@
 import productsModel from "../models/products.model.js";
-import { InputsValidationError, NotFoundError } from "../../utils/error.js";
+import { InputsValidationError, NotFoundError } from "../utils/error.js";
 export class ProductManager {
     constructor() {
         //▼Muestra todos los productos con paginación

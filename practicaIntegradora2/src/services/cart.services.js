@@ -1,6 +1,5 @@
 import cartModel from "../models/carts.model.js";
-import { NotFoundError } from "../../utils/error.js";
-export class CartManager {
+export class CartService {
     constructor() {
         //▼ Al iniciar la instancia se crea un cart
         this.createCart = async () => {
@@ -19,9 +18,6 @@ export class CartManager {
         this.getCarts = async () => {
             try {
                 const carts = await cartModel.find();
-                if (!carts) {
-                    throw new NotFoundError("NO CARTS IN DATABASE");
-                }
                 return carts;
             }
             catch (error) {
@@ -36,7 +32,7 @@ export class CartManager {
                     .populate("car.product")
                     .lean();
                 if (!cart) {
-                    throw new NotFoundError("CART NOT FOUND");
+                    throw new Error("CART NOT FOUND");
                 }
                 return cart;
             }
@@ -76,7 +72,7 @@ export class CartManager {
                     _id: cid,
                 });
                 if (!findCart) {
-                    throw new NotFoundError("CART NOT FOUND");
+                    throw new Error("CART NOT FOUND");
                 }
                 const upgradeQuantity = await cartModel.updateOne({
                     "cart.product": pid,
@@ -86,7 +82,7 @@ export class CartManager {
                     },
                 });
                 if (!upgradeQuantity) {
-                    throw new NotFoundError("PRODUCT NOT FOUND IN CART");
+                    throw new Error("PRODUCT NOT FOUND IN CART");
                 }
                 return upgradeQuantity;
             }

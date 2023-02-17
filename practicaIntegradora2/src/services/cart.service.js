@@ -1,5 +1,5 @@
 import cartModel from "../models/carts.model.js";
-import { NotFoundError } from "../../utils/error.js";
+import { NotFoundError } from "../utils/error.js";
 export class CartManager {
     constructor() {
         //▼ Al iniciar la instancia se crea un cart

@@ -1,4 +1,4 @@
-import { NotFoundError } from "../../utils/error.js";
+import { NotFoundError } from "../utils/error.js";
 import userModel from "../models/user.models.js";
 export class UserManager {
     constructor() {
