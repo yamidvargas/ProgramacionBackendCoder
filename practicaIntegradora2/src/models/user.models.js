@@ -1,7 +1,10 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
+
+
 const Schema = mongoose.Schema;
-const userCollection = "users";
+const userCollection = "user";
+
 const userSchema = new Schema({
     first_name: String,
     last_name: String,

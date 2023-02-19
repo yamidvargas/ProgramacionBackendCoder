@@ -3,6 +3,7 @@ import passportJwt from "passport-jwt";
 import passportLocal from "passport-local";
 import userModel from "../models/user.models.js";
 import { cookieExtractor } from "../utils/jwt.js";
+import { UserService } from "../services/user.services.js";
 const JWT_SECRET = 'myCookieCoder';
 const JwtStrategy = passportJwt.Strategy;
 const JwtExtractor = passportJwt.ExtractJwt;

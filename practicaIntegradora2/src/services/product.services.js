@@ -34,19 +34,6 @@ export class ProductServices {
                 throw new Error(error.message);
             }
         };
-        /*     try {
-              const products = await productsModel.paginate({}, options);
-        
-              if (!products) {
-                throw new Error("THE DB IS EMPTY");
-              }
-        
-              return products;
-            } catch (error) {
-              throw new Error(error.message);
-            }
-          }; */
-        //▼Muestra un producto por id
         this.getProductById = async (pid) => {
             try {
                 const product = await productsModel.findById({ _id: pid }).lean();
@@ -59,7 +46,7 @@ export class ProductServices {
                 throw new Error(error.message);
             }
         };
-        //▼Agrega un producto
+        //Agrega un producto
         this.addProduct = async (newProduct) => {
             try {
                 if (!newProduct) {
@@ -75,7 +62,7 @@ export class ProductServices {
                 throw new Error(error.message);
             }
         };
-        //▼Actualiza un producto por id
+        //Actualiza un producto por id
         this.updateProduct = async (pid, updatedProduct) => {
             try {
                 if (!pid) {
@@ -88,7 +75,8 @@ export class ProductServices {
                 throw new Error(error.message);
             }
         };
-        //▼Elimina un producto
+        //agregar un nuevo producto al carrito 
+        //Elimina un producto
         this.deleteProduct = async (pid) => {
             try {
                 if (!pid) {

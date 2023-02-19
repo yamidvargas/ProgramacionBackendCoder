@@ -1,8 +1,7 @@
-import express from "express";
-import Managers from "../DAO/managers/indexManager.js";
-const Router = express.Router();
+"express";
+const router = Router();
 // Mostrar todos los carritos
-Router.get("/", async (req, res) => {
+router.get("/", async (req, res) => {
     try {
         const carts = await Managers.cartsManager.getCarts();
         res.send({
@@ -19,7 +18,7 @@ Router.get("/", async (req, res) => {
     }
 });
 //Crea un nuevo carrito
-Router.post("/", async (req, res) => {
+router.post("/", async (req, res) => {
     try {
         const result = await Managers.cartsManager.createCart();
         res.send({
@@ -36,7 +35,7 @@ Router.post("/", async (req, res) => {
     }
 });
 //Muestra un carrito en particular y sus productos
-Router.get("/:cid", async (req, res) => {
+router.get("/:cid", async (req, res) => {
     try {
         const { cid } = req.params;
         const result = await Managers.cartsManager.getCartById(cid);
@@ -60,7 +59,7 @@ Router.get("/:cid", async (req, res) => {
     }
 });
 //Agrego un producto al carrito
-Router.post("/:cid/product/:pid", async (req, res) => {
+router.post("/:cid/product/:pid", async (req, res) => {
     try {
         const { cid, pid } = req.params;
         const result = await Managers.cartsManager.addProductToCart(cid, pid);
@@ -79,7 +78,7 @@ Router.post("/:cid/product/:pid", async (req, res) => {
     }
 });
 //Eliminar del carrito el producto seleccionado
-Router.delete("/:cid/product/:pid", async (req, res) => {
+router.delete("/:cid/product/:pid", async (req, res) => {
     try {
         const { cid, pid } = req.params;
         const result = await Managers.cartsManager.deleteProductFromCart(cid, pid);
@@ -97,7 +96,7 @@ Router.delete("/:cid/product/:pid", async (req, res) => {
     }
 });
 //Agregar al carrito un array de productos
-Router.put("/:cid", async (req, res) => {
+router.put("/:cid", async (req, res) => {
     try {
         const { cid } = req.params;
         const products = req.body;
@@ -116,7 +115,7 @@ Router.put("/:cid", async (req, res) => {
     }
 });
 //Actualizar la cantidad de un producto
-Router.put("/:cid/product/:pid", async (req, res) => {
+router.put("/:cid/product/:pid", async (req, res) => {
     try {
         const { quantity } = req.body;
         const { cid, pid } = req.params;
@@ -135,7 +134,7 @@ Router.put("/:cid/product/:pid", async (req, res) => {
     }
 });
 //Vaciar el carrito
-Router.delete("/:cid", async (req, res) => {
+router.delete("/:cid", async (req, res) => {
     try {
         const { cid } = req.params;
         const result = await Managers.cartsManager.emptyCart(cid);

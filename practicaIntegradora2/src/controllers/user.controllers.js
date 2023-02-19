@@ -1,4 +1,4 @@
-const COOKIE_NAME = "cokieuserCont";
+const COOKIE_NAME = "cokieuserController";
 export const getRegister = (req, res) => {
     try {
         res.render("register");

@@ -1,37 +1,9 @@
 import { NotFoundError } from "../utils/error.js";
 import userModel from "../models/user.models.js";
+import { generateToken } from "../utils/jwt.js";
 export class UserServices {
     constructor() {
-        //Crear un nuevo usuario
-        this.userCreate = async (newUserData) => {
-            try {
-                newUserData.password = await userModel.encryptPassword(newUserData.password);
-                const result = await userModel.create(newUserData);
-                if (!result) {
-                    throw new Error("FAILED TO ADD TO DATABASE");
-                }
-                return result;
-            }
-            catch (error) {
-                console.log(error);
-            }
-        };
-        //Loguear usuario
-        this.userLogin = async (email, password) => {
-            try {
-                const findUser = await userModel.findOne({ email }).lean();
-                if (!findUser)
-                    throw new NotFoundError("USER NOT FOUND");
-                const passwordCompare = await userModel.comparePassword(password, findUser.password);
-                if (!passwordCompare)
-                    throw new NotFoundError("Invalid Password");
-                return findUser;
-            }
-            catch (error) {
-                console.log(error);
-            }
-        };
-        //encontrar todos los usuarios
+        //obtener todos los usuarios
         this.getAllUser = async () => {
             try {
                 const result = await userModel.find().lean();
@@ -44,19 +16,61 @@ export class UserServices {
                 console.log(error);
             }
         };
-        this.getUserById = async (id) => {
+        //buscar un usuario
+        this.findUser = async (email) => {
             try {
-                const findUser = await userModel.findById(id);
-                return findUser;
+                const user = await userModel.findOne({ email }).lean().exec();
+                return user;
             }
             catch (error) {
                 console.log(error);
             }
         };
-        this.getUserByEmail = async (email) => {
+        //Crear un nuevo usuario
+        this.userRegistration = async (req, username, password, done) => {
             try {
-                const findUser = await userModel.findOne(email);
-                return findUser;
+                const user = await this.findUser(username);
+                if (user) {
+                    return done(null, false);
+                }
+                const newUser = {
+                    first_name: req.body.first_name,
+                    last_name: req.body.last_name,
+                    email: req.body.email,
+                    age: req.body.age,
+                    password: await userModel.encryptPassword(password),
+                };
+                const createNewUser = await userModel.create(newUser);
+                return done(null, createNewUser);
+            }
+            catch (error) {
+                console.log(error);
+                return done(error);
+            }
+        };
+        //Loguear usuario
+        this.userLogin = async (username, password, done) => {
+            try {
+                const findUser = await this.findUser(username);
+                if (!findUser) {
+                    return done(null, user);
+                }
+                const comparePassword = await userModel.comparePassword(password, findUser.password);
+                if (!comparePassword) {
+                    console.log("Invalid Password");
+                    return done(null, false);
+                }
+                const token = generateToken(findUser);
+                findUser.token = token;
+                return done(null, findUser);
+            }
+            catch (error) {
+                console.log(error);
+                return done(error);
+            }
+        };
+        this.logoutUser = async () => {
+            try {
             }
             catch (error) {
                 console.log(error);
