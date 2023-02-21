@@ -1,7 +1,5 @@
 import jwt from "jsonwebtoken";
 import passport from "passport";
-//JWT_SECRET="amongus333"
-//COOKIE_NAME="hans2015"
 const JWT_SECRET = "jwtcookieSecret";
 const COOKIE_NAME = "cokieuserController";
 export const generateToken = (user) => {
@@ -35,9 +33,9 @@ export const cookieExtractor = (req) => {
 export const passportCall = (strategy) => {
     return async (req, res, next) => {
         passport.authenticate(strategy, (err, user, info) => {
+            console.log(info);
             if (err)
                 return next();
-            console.log("aca estamos en pasport call", user);
             if (!user)
                 return res.status(400).render("loginRequired", { error: info });
             req.user = user;

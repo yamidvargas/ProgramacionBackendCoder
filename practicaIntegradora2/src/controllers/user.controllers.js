@@ -26,6 +26,7 @@ export const postRegister = (req, res) => {
     res.status(200).redirect("/login");
 };
 export const postLogin = (req, res) => {
+    console.log(req.user);
     if (!req.user) {
         return res.status(400).render("errors", { error: "Invalid credentials" });
     }
