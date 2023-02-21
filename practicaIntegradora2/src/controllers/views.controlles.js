@@ -1,5 +1,5 @@
-import { ProductsService } from "../services/products.services.js";
-import {UserService} from "../services/users.services.js";
+import { ProductsService } from "../services/product.services.js";
+import userService from "../services/user.services.js";
 export const getAllProducts = async (req, res) => {
     try {
         const { query, limit, sort, page } = req.query;
@@ -9,7 +9,7 @@ export const getAllProducts = async (req, res) => {
             sort: { price: sort } || { price: 1 },
             lean: true,
         };
-        const response = await ProductsService.getAllProducts(query, options);
+        const response = await ProductsService.getProducts(query, options);
         const user = req.session.user;
         res.render("home", {
             style: "styles.css",
@@ -18,7 +18,8 @@ export const getAllProducts = async (req, res) => {
         });
     }
     catch (error) {
-        res.render("error");
+        console.log("--------------------------------------");
+        //res.render("errors");
     }
 };
 export const getOneProduct = async (req, res) => {
@@ -40,7 +41,7 @@ export const getCart = (req, res) => {
 export const getAdmin = async (req, res) => {
     try {
         const role = req.session.user.role;
-        const users = await UserService.finAll();
+        const users = await userService.getAllUser();
         if (role === "admin") {
             return res.render("admin", {
                 style: "styles.css",
@@ -53,7 +54,7 @@ export const getAdmin = async (req, res) => {
 };
 export const getErrorPage = (req, res) => {
     try {
-        return res.render("error");
+        return res.render("errors");
     }
     catch (error) {
         console.log(error);

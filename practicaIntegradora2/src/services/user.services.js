@@ -78,4 +78,5 @@ export class UserServices {
         };
     }
 }
-export const UserService = new UserServices();
+const userService = new UserServices();
+export default userService;

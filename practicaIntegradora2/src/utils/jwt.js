@@ -3,7 +3,7 @@ import passport from "passport";
 //JWT_SECRET="amongus333"
 //COOKIE_NAME="hans2015"
 const JWT_SECRET = "jwtcookieSecret";
-const COOKIE_NAME = "myCookieCoder";
+const COOKIE_NAME = "cokieuserController";
 export const generateToken = (user) => {
     const token = jwt.sign({ user }, JWT_SECRET, {
         expiresIn: "24h",
@@ -37,8 +37,9 @@ export const passportCall = (strategy) => {
         passport.authenticate(strategy, (err, user, info) => {
             if (err)
                 return next();
+            console.log("aca estamos en pasport call", user);
             if (!user)
-                return res.status(400).render("error", { error: info });
+                return res.status(400).render("loginRequired", { error: info });
             req.user = user;
             next();
         })(req, res, next);

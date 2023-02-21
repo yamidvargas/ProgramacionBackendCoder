@@ -27,7 +27,7 @@ export const postRegister = (req, res) => {
 };
 export const postLogin = (req, res) => {
     if (!req.user) {
-        return res.status(400).render("error", { error: "Invalid credentials" });
+        return res.status(400).render("errors", { error: "Invalid credentials" });
     }
     req.session.user = {
         first_name: req.user.first_name,

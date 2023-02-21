@@ -3,20 +3,20 @@ import passportJwt from "passport-jwt";
 import passportLocal from "passport-local";
 import userModel from "../models/user.models.js";
 import { cookieExtractor } from "../utils/jwt.js";
-import { UserService } from "../services/user.services.js";
+import userService from "../services/user.services.js";
 const JWT_SECRET = 'myCookieCoder';
 const JwtStrategy = passportJwt.Strategy;
 const JwtExtractor = passportJwt.ExtractJwt;
 const LocalStrategy = passportLocal.Strategy;
-const { registerUser, loginUser } = UserService;
+const { userRegistration, userLogin } = userService;
 const initializePassport = () => {
     passport.use("register", new LocalStrategy({
         passReqToCallback: true,
         usernameField: "email",
-    }, (req, username, password, done) => registerUser(req, username, password, done)));
+    }, (req, username, password, done) => userRegistration(req, username, password, done)));
     passport.use("login", new LocalStrategy({
         usernameField: "email",
-    }, (username, password, done) => loginUser(username, password, done)));
+    }, (username, password, done) => userLogin(username, password, done)));
     passport.use("jwt", new JwtStrategy({
         jwtFromRequest: JwtExtractor.fromExtractors([cookieExtractor]),
         secretOrKey: JWT_SECRET,
