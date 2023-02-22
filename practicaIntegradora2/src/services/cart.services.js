@@ -139,4 +139,5 @@ export class CartService {
         };
     }
 }
-export const CartServices = new CartService();
+const cartServices = new CartService();
+export default cartServices;

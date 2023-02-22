@@ -1,4 +1,5 @@
-const COOKIE_NAME = "cokieuserController";
+import dotenv from "dotenv";
+dotenv.config();
 export const getRegister = (req, res) => {
     try {
         res.render("register");
@@ -19,14 +20,13 @@ export const getLogout = async (req, res) => {
     req.session.destroy((err) => {
         if (err)
             return res.status(500).render("errors", { error: err });
-        res.clearCookie(COOKIE_NAME).redirect("/login");
+        res.clearCookie(process.env.COOKIE_NAME).redirect("/login");
     });
 };
 export const postRegister = (req, res) => {
     res.status(200).redirect("/login");
 };
 export const postLogin = (req, res) => {
-    console.log(req.user);
     if (!req.user) {
         return res.status(400).render("errors", { error: "Invalid credentials" });
     }
@@ -37,7 +37,10 @@ export const postLogin = (req, res) => {
         age: req.user.age,
         role: req.user.role,
     };
-    res.cookie(COOKIE_NAME, req.user.token).redirect("/products");
+    console.log("--------------------------------");
+    console.log(req.session.user.token);
+    console.log("--------------------------------");
+    res.cookie(process.env.COOKIE_NAME, req.user.token).redirect("/products");
 };
 export const getCurrentUser = (req, res) => {
     try {

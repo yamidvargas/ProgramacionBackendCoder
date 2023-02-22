@@ -1,3 +1,4 @@
+import cartServices from "../services/cart.services.js";
 import { ProductsService } from "../services/product.services.js";
 import userService from "../services/user.services.js";
 export const getAllProducts = async (req, res) => {
@@ -18,7 +19,6 @@ export const getAllProducts = async (req, res) => {
         });
     }
     catch (error) {
-        console.log("--------------------------------------");
         //res.render("errors");
     }
 };
@@ -26,15 +26,19 @@ export const getOneProduct = async (req, res) => {
     try {
         const { pid } = req.params;
         const response = await ProductsService.getProductById(pid);
-        res.render("oneProduct", {
+        res.render("productDetail", {
             style: "styles.css",
             response,
         });
     }
     catch (error) { }
 };
-export const getCart = (req, res) => {
+export const getCarById = async (req, res) => {
     try {
+        const { cid } = req.params;
+        const cart = await cartServices.getCartById(cid);
+        console.log(cart);
+        res.render("cart", cart);
     }
     catch (error) { }
 };
