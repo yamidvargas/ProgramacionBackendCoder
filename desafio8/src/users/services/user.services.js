@@ -3,7 +3,7 @@ import userModel from "../../models/user.models.js";
 import { generateToken } from "../../utils/jwt.js";
 export class UserServices {
     constructor() {
-        //obtener todos los usuarios
+        //obtener todos los usuarios 
         this.getAllUser = async () => {
             try {
                 const result = await userModel.find().lean();
