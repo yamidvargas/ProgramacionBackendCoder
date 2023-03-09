@@ -1,0 +1,10 @@
+import Router from "express";
+import passport from "passport";
+import { getLogin, getLogout, getRegister, postLogin, postRegister, } from "../controllers/user.controllers.js";
+const router = Router();
+router.get("/", getLogin);
+router.get("/register", getRegister);
+router.post("/register", passport.authenticate("register", { failureRedirect: "/error" }), postRegister);
+router.post("/", passport.authenticate("login", { failureRedirect: "/error" }), postLogin);
+router.get("/logout", getLogout);
+export default router;
